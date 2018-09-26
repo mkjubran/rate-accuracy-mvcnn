@@ -1,24 +1,52 @@
 # main
-AVC/H.264 cropped Bitstream:
+
+AVC/H.264 Cropped Bitstream
+
 To produce cropped Bitstream use
 ./JM_Cropped_MV_Stats -svid <source video>
 
-Outputs:
-1- Cropped JM bitstream
-2- MV.bin file where MV values are mapped to a grid of MBs
-3- States (including rate) per frame for the cropped Bitstream
-4- States (including rate) per frame for the Bitstream produced by the Original JM encoder
-
-Usage:
+Options:
 Various encoding parameters can be set directly such as
-   --ecfg   configuration file
+   --ecfg   JM configuration file
    -svid    input video
    --qp     QP value for P and I frames
    --sr     search range
    --res    resolution of the MB Grid (4,8,16)
    
+Outputs:
+1- Cropped JM bitstream
+2- MV.bin file where MV values are mapped to a grid according to the correspodning MB position
+3- States (including rate) per frame for the cropped bitstream
+4- Summary of states for the cropped bitstream
+5- States (including rate) per frame for the bitstream produced by the original JM encoder
+6- Summary of states for the original JM bitstream
 
-To use this .....
+----------------------------------------------------------------
+HEVC/H.265 Cropped Bitstream
+
+To produce cropped Bitstream use
+./HM_Cropped_MV_Stats -svid <source video>
+
+Options:
+Various encoding parameters can be set directly such as
+   --ecfg   HM configuration file
+   -svid    input video
+   --qp     QP value for P and I frames
+   --mcu    Maximum CTU size
+   --mpd    Maximum partition depth
+   --sr     search range
+   --res    resolution of the MB Grid (4,8,16)
+   
+Outputs:
+1- Cropped HM bitstream
+2- MV.bin file where MV values are extracted from cropped HM bitstream and mapped to a grid according to the correspodning MB position
+3- States (including rate) per frame for the cropped bitstream
+4- Summary of states for the cropped bitstream
+5- States (including rate) per frame for the bitstream produced by the original JM encoder
+6- Summary of states for the original JM bitstream
+
+----------------------------------------------------------
+To produce results in the JRNL paper:
 1-Edit the header of the MultiProcessGenerateJMMVComputeSaveOrigin shell script to specify the video coding parameters of the JM codec.
 2-Edit the header of the  GenerateAndComputeSizeRatio-UCF-Split-1 shell script to specify the path of folder that includes all original UCF videos.
 3-Run the MultiProcessGenerateJMMVComputeSaveOrigin script, this will produce three output files per input video stored in parent directly called JMMV. These files are
