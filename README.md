@@ -9,7 +9,7 @@ Options:
 Various encoding parameters can be set directly such as
    --ecfg   JM configuration file
    -svid    input video
-   --qp     QP value for P and I frames
+   --qp     qP value for P and I frames
    --sr     search range
    --res    resolution of the MB Grid (4,8,16)
    
@@ -31,19 +31,18 @@ Options:
 Various encoding parameters can be set directly such as
    --ecfg   HM configuration file
    -svid    input video
-   --qp     QP value for P and I frames
-   --mcu    Maximum CTU size
-   --mpd    Maximum partition depth
+   --qp     qP value for P and I frames
+   --mcu    maximum CTU size
+   --mpd    maximum partition depth
    --sr     search range
    --res    resolution of the MB Grid (4,8,16)
    
 Outputs:
 1- Cropped HM bitstream
-2- MV.bin file where MV values are extracted from cropped HM bitstream and mapped to a grid according to the correspodning MB position
-3- States (including rate) per frame for the cropped bitstream
+2- Original HM bitstream
+3- MV.bin file where MV values are extracted from cropped HM bitstream and mapped to a grid according to the correspodning CU position
 4- Summary of states for the cropped bitstream
-5- States (including rate) per frame for the bitstream produced by the original JM encoder
-6- Summary of states for the original JM bitstream
+5- Summary of states for the original HM bitstream
 
 ----------------------------------------------------------
 To produce results in the JRNL paper:
