@@ -1,7 +1,7 @@
 # main
 AVC/H.264 cropped Bitstream:
 To produce cropped Bitstream use
-./JM_Cropped_MV_Stats -svid {source video}
+./JM_Cropped_MV_Stats -svid <source video>
 
 Outputs:
 1- Cropped JM bitstream
@@ -9,9 +9,14 @@ Outputs:
 3- States (including rate) per frame for the cropped Bitstream
 4- States (including rate) per frame for the Bitstream produced by the Original JM encoder
 
-Options:
+Usage:
 Various encoding parameters can be set directly such as
-
+   --ecfg   configuration file
+   -svid    input video
+   --qp     QP value for P and I frames
+   --sr     search range
+   --res    resolution of the MB Grid (4,8,16)
+   
 
 To use this .....
 1-Edit the header of the MultiProcessGenerateJMMVComputeSaveOrigin shell script to specify the video coding parameters of the JM codec.
