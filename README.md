@@ -1,4 +1,18 @@
 # main
+AVC/H.264 cropped Bitstream:
+To produce cropped Bitstream use
+./JM_Cropped_MV_Stats -svid {source video}
+
+Outputs:
+1- Cropped JM bitstream
+2- MV.bin file where MV values are mapped to a grid of MBs
+3- States (including rate) per frame for the cropped Bitstream
+4- States (including rate) per frame for the Bitstream produced by the Original JM encoder
+
+Options:
+Various encoding parameters can be set directly such as
+
+
 To use this .....
 1-Edit the header of the MultiProcessGenerateJMMVComputeSaveOrigin shell script to specify the video coding parameters of the JM codec.
 2-Edit the header of the  GenerateAndComputeSizeRatio-UCF-Split-1 shell script to specify the path of folder that includes all original UCF videos.
