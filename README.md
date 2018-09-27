@@ -13,6 +13,7 @@ In order to run thie code you will need:
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstream and the approximated flow run
 ```
+cd JM_MV_CNN
 ./JM_Cropped_MV_Stats -svid <input_video>
 ```
 
@@ -29,7 +30,7 @@ Option | Description [default]
 --svid |  Input video [./v_BoxingPunchingBag_g05_c01.avi]
 --W  | width of the YUV video [320]
 --H | height of thhe YUV video [240]
---ecfg |  JM configuration file [encoder_options.cfg]
+--ecfg |  JM configuration file [encoder_option2.cfg]
 --qp  |   QP value for P and I frames [40]
 --sr  |   search range [16]
 --res  |  resolution of the MB Grid (4,8,16) [8]
@@ -57,6 +58,7 @@ JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi
 ## Cropped HEVC Bitstream and Optical Flow Approximation (MVs)
 To produce HEVC cropped bitstream and the approximated flow run
 ```
+cd HM_MV_CNN
 ./HM_Cropped_MV_Stats -svid <input_video>
 ```
 
@@ -90,7 +92,7 @@ The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
 Sample Output using default parameters:
 ```
 %########################################################################################
-JM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
+HM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
 - Converting source video to YUV format
 - Producing cropped HEVC bitstream (encoder)
