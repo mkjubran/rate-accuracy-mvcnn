@@ -27,11 +27,13 @@ Various encoding parameters can be set directly such as
 
 Option | Description [default]
 ---|---
+--svid |  Input video [./v_BoxingPunchingBag_g05_c01.avi]
+--W  | width of the YUV video [320]
+--H | height of thhe YUV video [240]
 --ecfg |  JM configuration file [encoder_options.cfg]
---svid |  Input video
---qp  |   QP value for P and I frames
---sr  |   search range
---res  |  resolution of the MB Grid (4,8,16)
+--qp  |   QP value for P and I frames [40]
+--sr  |   search range [16]
+--res  |  resolution of the MB Grid (4,8,16) [8]
    
 Outputs:
 1. Cropped JM bitstream

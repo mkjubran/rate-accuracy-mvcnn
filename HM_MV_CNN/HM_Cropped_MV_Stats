@@ -9,7 +9,8 @@ MaxPartitionDepth=2		#Maximum parition depth which plays a factor in setting the
 SearchRange=16			#value [16,32,64]
 mbmapXxX=8			#value [8,16]
 SourceVid='v_BoxingPunchingBag_g05_c01.avi' #Source Video to be used to produce cropped bitstream, MVs, and stast file
-
+Width=320
+Height=240
 
 ## Parsing Command Line Parameters
 ## cmd exmaple: ./Generate-Split-1 -ecfg=encoder.cfg -qp=25 -sr=16 -res=4 -settype=test sset=01 -ifvid=1 -nvid=5 -strcom=Opt1a
@@ -47,6 +48,14 @@ case $i in
     SourceVid="${i#*=}"
     shift
     ;;
+    -w=*|--w=*)
+    Width="${i#*=}"
+    shift
+    ;;
+    -h=*|--h=*)
+    Height="${i#*=}"
+    shift
+    ;;
     *)
           # unknown option
     ;;
@@ -74,7 +83,7 @@ rm './HM_MVX_NoTexture/vid/HMInputVideo.yuv'
 fi
 
 echo "Converting source video to YUV format"
-ffmpeg -loglevel panic -i $SourceVid -vf scale=320:240 -vcodec rawvideo -pix_fmt yuv420p './HM_MVX_NoTexture/vid/HMInputVideo.yuv' > /dev/null
+ffmpeg -loglevel panic -i $SourceVid -vf scale=$Width:$Height -vcodec rawvideo -pix_fmt yuv420p './HM_MVX_NoTexture/vid/HMInputVideo.yuv' > /dev/null
 cp -f ./HM_MVX_NoTexture/vid/HMInputVideo.yuv ./HM_MVX/vid/ > /dev/null
 
 cd HM_MVX_NoTexture/bin
