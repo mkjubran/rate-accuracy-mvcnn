@@ -63,7 +63,6 @@ echo %##########################################################################
 
 rm ./JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv
 echo "Converting source video to YUV format"
-echo $Width:$Height
 ffmpeg -loglevel panic -i $SourceVid -vf scale=$Width:$Height -vcodec rawvideo -pix_fmt yuv420p './JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv' > /dev/null
 cp -f ./JM_MVX_NoTexture/bin/vid/JMInputVideo.yuv ./JM_MVX/bin/vid/ > /dev/null
 cd JM_MVX_NoTexture/bin
