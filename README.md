@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains our public tool for producing cropped AVC and HEVC bitstream, extracting optical flow approximation (MVs) and two classification acrchituctures (2D-CNN and 3D-CNN).
+This repository contains our public tool for producing cropped AVC and HEVC bitstream, extracting optical flow approximation (MVs), and two classification architectures (2D-CNN and 3D-CNN).
 
 ## Prerequisites
 
@@ -23,9 +23,8 @@ The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 3. decoded the cropped bitstream using the modified AVC/H.264 JM reference software to extract the MVs
 4. map these MVs to a Gird with a dimmension set according to the resolution of the input video (WxH) and res parameters
 
-
-Option | Description
 Various encoding parameters can be set directly such as
+Option | Description
    --ecfg |  JM configuration file
    --svid |  input video
    --qp  |   QP value for P and I frames
