@@ -1,11 +1,11 @@
 # main
 
-##AVC/H.264 Cropped Bitstream
+## AVC/H.264 Cropped Bitstream
 
-##To produce cropped Bitstream use
+To produce cropped Bitstream use
 ./JM_Cropped_MV_Stats -svid <source video>
 
-##Options:
+Options:
 Various encoding parameters can be set directly such as
    --ecfg   JM configuration file
    -svid    input video
@@ -33,7 +33,7 @@ Mapping MV to a grid according to Macroblocks positions
 Moving outputs to JMMV parent directory
 
 ----------------------------------------------------------------
-HEVC/H.265 Cropped Bitstream
+## HEVC/H.265 Cropped Bitstream
 
 To produce cropped Bitstream use
 ./HM_Cropped_MV_Stats -svid <source video>
@@ -66,7 +66,8 @@ Original HM: encoding and then decoding to produce rates and stats (optional)
 Moving outputs to HMMV parent directory
 
 ----------------------------------------------------------
-To produce results in the JRNL paper:
+## Multi-CNN Framework
+To produce the data required to evaluate the Multi-CNN on UCF-101 Split0:
 1-Edit the header of the MultiProcessGenerateJMMVComputeSaveOrigin shell script to specify the video coding parameters of the JM codec.
 2-Edit the header of the  GenerateAndComputeSizeRatio-UCF-Split-1 shell script to specify the path of folder that includes all original UCF videos.
 3-Run the MultiProcessGenerateJMMVComputeSaveOrigin script, this will produce three output files per input video stored in parent directly called JMMV. These files are
