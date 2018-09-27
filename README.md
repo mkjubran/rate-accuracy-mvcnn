@@ -43,6 +43,7 @@ The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
 - Summary of states for the original JM bitstream
 
 Sample Output using default parameters:
+```
 %########################################################################################
 JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
@@ -52,7 +53,7 @@ JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi
 - Original JM: encoding to produce rate (bps) per frame (optional: for comparison purposes) 
 - Mapping MV to a grid according to Macroblocks positions
 - Moving outputs to JMMV parent directory
-
+```
 ## Cropped HEVC Bitstream and Optical Flow Approximation (MVs)
 To produce HEVC cropped bitstream and the approximated flow run
 ```
@@ -87,6 +88,7 @@ The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
 - Moving outputs to HMMV parent directory
 
 Sample Output using default parameters:
+```
 %########################################################################################
 JM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
@@ -96,5 +98,5 @@ JM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c
 - Original HM: encoding to produce rate (bps) per frame (optional) 
 - Mapping MV to a grid according to Macr
 - Moving outputs to HMMV parent directory
-
+```
 
