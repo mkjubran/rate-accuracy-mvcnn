@@ -94,7 +94,7 @@ x.bin | compressed HM bitstream
 x_Cropped.bin | Cropped HM bitstream
 x_HMMV.bin | Flow estimate using HM MVs
 x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
-x_HMStats_Orig.dat | Summary of states for the original JM bitstream
+x_HMStats_Orig.dat | Summary of states for the original HM bitstream
 
 Sample Output using default parameters:
 ```
