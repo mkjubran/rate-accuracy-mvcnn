@@ -1,0 +1,220 @@
+#!/bin/bash
+#clear
+
+# Set initial default parameters
+enc_cfg=encoder_Jubran.cfg	#HM encoder configuration file
+QP=24	 			#value [0 - 51]
+MaxCUSize=16			#Maximum CU size which plays a factor in setting the resolution of MVs
+MaxPartitionDepth=2		#Maximum parition depth which plays a factor in setting the resolution of the MVs
+SearchRange=16			#value [16,32,64]
+mbmapXxX=8			#value [8,16]
+SourceVid='v_BoxingPunchingBag_g05_c01.avi' #Source Video to be used to produce cropped bitstream, MVs, and stast file
+
+
+## Parsing Command Line Parameters
+## cmd exmaple: ./Generate-Split-1 -ecfg=encoder.cfg -qp=25 -sr=16 -res=4 -settype=test sset=01 -ifvid=1 -nvid=5 -strcom=Opt1a
+for i in "$@"
+do
+case $i in
+    -ecfg=*|--ecfg=*)
+    enc_cfg="${i#*=}"
+    shift
+    ;;
+    -qp=*|--qp=*)
+    QP="${i#*=}"
+    QP="${i#*=}"
+    shift
+    ;;
+    -mcu=*|--mcu=*)
+    MaxCUSize="${i#*=}"
+    MaxCUSize="${i#*=}"
+    shift
+    ;;
+    -mpd=*|--mpd=*)
+    MaxPartitionDepth="${i#*=}"
+    MaxPartitionDepth="${i#*=}"
+    shift
+    ;;
+    -sr=*|--sr=*)
+    SearchRange="${i#*=}"
+    shift
+    ;;
+    -res=*|--res=*)
+    mbmapXxX="${i#*=}"
+    shift
+    ;;
+    -svid=*|--svid=*)
+    SourceVid="${i#*=}"
+    shift
+    ;;
+    *)
+          # unknown option
+    ;;
+esac
+done
+#### End Parsing Command Line Parameters
+
+# Hardcoded Parameters
+NumFrame=300000
+
+#%%%%%%%%%% Hidder General Info
+echo %########################################################################################
+echo "HM config file=${enc_cfg}, Source Video=$SourceVid, QP=$QP, Max CU Size=$MaxCUSize, Max Partition Depth=$MaxPartitionDepth, Search Range=$SearchRange, MV Resolution=$mbmapXxX"
+echo %########################################################################################
+
+#%%%%%%%%%% Transcoding FileName from .avi to .yuv and store the output yuv file in ./vid/"
+
+if [ ! -e "$SourceVid" ] ; then
+echo "$SourceVid" "doesn't exit"
+break
+fi
+
+if [ -e "./HM_MVX_NoTexture/vid/HMInputVideo.yuv" ] ; then
+rm './HM_MVX_NoTexture/vid/HMInputVideo.yuv'
+fi
+
+echo "Converting source video to YUV format"
+ffmpeg -loglevel panic -i $SourceVid -vf scale=320:240 -vcodec rawvideo -pix_fmt yuv420p './HM_MVX_NoTexture/vid/HMInputVideo.yuv' > /dev/null
+cp -f ./HM_MVX_NoTexture/vid/HMInputVideo.yuv ./HM_MVX/vid/ > /dev/null
+
+cd HM_MVX_NoTexture/bin
+
+if [ ! -e "../vid/HMInputVideo.yuv" ] ; then
+echo "Problem with ffmpeg while converting $SourceVid to yuv, ../vid/HMInputVideo.yuv is not generated"
+break
+fi
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%% Encoding and Decoding using NoTexture HM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%% Encoding FileName from .yuv to .265 using HM encoder"
+if [ ! -e "../cfg/$enc_cfg" ] ; then
+echo "../cfg/$enc_cfg" "doesn't exit"
+break
+fi
+
+if [ -e "../vid/HMEncodedVideo.bin" ] ; then
+rm ../vid/HMEncodedVideo.bin
+fi
+
+rm -rf ./logNoTexture
+
+echo "Producing cropped HEVC bitstream (encoder)" 
+./TAppEncoderStatic -c ../cfg/$enc_cfg --InputFile="../vid/HMInputVideo.yuv" --QP=$QP --FramesToBeEncoded=$NumFrame --MaxCUSize=$MaxCUSize --MaxPartitionDepth=$MaxPartitionDepth --BitstreamFile="../vid/HMEncodedVideo.bin" > logNoTexture
+
+if [ ! -e "../vid/HMEncodedVideo.bin" ] ; then
+echo "Problem with encoding [$SourceVid] yuv to 265, ../vid/HMEncodedVideo.bin is not generated"
+break
+fi
+
+SizeNoTexture=`ls -la ../vid/HMEncodedVideo.bin` #% to display the size of file
+echo $AbsFileName > stats.dat
+echo $SizeNoTexture >> stats.dat
+
+#%%%%%%%%%% Decoding FileName from .265 to .yuv using HM decoder"
+rm mv.bin > /dev/null 2>&1
+rm ../vid/HMDecodedVideo.yuv > /dev/null 2>&1
+echo "Extracting MVs from the cropped HEVC bitstream (decoder)" 
+./TAppDecoderStatic --BitstreamFile="../vid/HMEncodedVideo.bin" --ReconFile="../vid/HMDecodedVideo.yuv" >> logNoTexture #> /dev/null
+
+cat logNoTexture >> stats.dat
+
+if [ ! -e "../vid/HMDecodedVideo.yuv" ] ; then
+echo "Problem with decoding [$SourceVid].bin to yuv, ../vid/HMDecodedVideo.yuv is not generated"
+break
+fi
+
+#%%%%%%%%%%%%%%%%% Encoding and Decoding using Original HM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%% copying yuv video files and config files from NoTexture HM directory to Original HM directory %%%%%%%%%%%%%%%%%%
+rm ../../HM_MVX/vid/HMInputVideo.yuv
+cp -f ../vid/HMInputVideo.yuv ../../HM_MVX/vid/. > /dev/null
+if [ ! -e "../../HM_MVX/vid/HMInputVideo.yuv" ] ; then
+echo "Problem with copying the $SourceVid yuv file from HM_MV_NoTexture directory to HM_MV directory, ../../HM_MVX/vid/HMInputVideo.yuv is not copied"
+break
+fi
+
+rm ../../HM_MVX/cfg/$enc_cfg
+cp -f ../cfg/$enc_cfg ../../HM_MVX/cfg/. > /dev/null
+if [ ! -e "../../HM_MVX/cfg/$enc_cfg" ] ; then
+echo "Copying $enc_cfg from HM_MV_NoTexture directory to HM_MV directory failed"
+break
+fi
+
+#%%%%%%%%%% Encoding FileName from .yuv to .265 using HM encoder"
+cd ../../HM_MVX/bin #% move to the Original HM Directory
+
+if [ ! -e "../cfg/$enc_cfg" ] ; then
+echo "../cfg/$enc_cfg" "doesn't exit"
+break
+fi
+
+if [ -e "../vid/HMEncodedVideo.bin" ] ; then
+rm ../vid/HMEncodedVideo.bin > /dev/null 2>&1
+fi
+
+rm -rf ./logOrig
+echo "Original HM: encoding and then decoding to produce rates and stats (optional)" 
+./TAppEncoderStatic -c ../cfg/$enc_cfg --InputFile="../vid/HMInputVideo.yuv" --QP=$QP --FramesToBeEncoded=$NumFrame --MaxCUSize=$MaxCUSize --MaxPartitionDepth=$MaxPartitionDepth --BitstreamFile="../vid/HMEncodedVideo.bin" > logOrig
+
+if [ ! -e "../vid/HMEncodedVideo.bin" ] ; then
+echo "Problem with encoding [$SourceVid] yuv to 265, ../vid/HMEncodedVideo.bin is not generated"
+break
+fi
+
+SizeOrig=`ls -la ../vid/HMEncodedVideo.bin`  #% to display the size of file
+echo $AbsFileName > stats.dat
+echo $SizeOrig >> stats.dat
+
+
+#%%%%%%%%%% Decoding FileName from .265 to .yuv using HM decoder"
+rm mv.bin > /dev/null 2>&1
+rm ../vid/HMDecodedVideo.yuv > /dev/null 2>&1
+
+./TAppDecoderStatic --BitstreamFile="../vid/HMEncodedVideo.bin" --ReconFile="../vid/HMDecodedVideo.yuv" >> logOrig #> /dev/null
+
+cat logOrig >> stats.dat
+
+if [ ! -e "../vid/HMDecodedVideo.yuv" ] ; then
+echo "Problem with decoding [$SourceVid].bin to yuv, ../vid/HMDecodedVideo.yuv is not generated"
+break
+fi
+
+cd ../../HM_MVX_NoTexture/bin #% moveing back to the Original HM Directory
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+#%%%%%%%%%% Mapping MV to Macroblocks (make grid) and make them in a format suitable as input to classifier (Training/Testing)"
+rm ../../mbmap/mv_dec.bin
+mv -f mv.bin ../../mbmap/mv_dec.bin
+cd ../../mbmap
+if [ $mbmapXxX -eq 8 ] || [ $mbmapXxX -eq 4 ];
+then
+./mbmap -h 240 -w 320 -$mbmapXxX -o HMMV_mbmap.bin mv_dec.bin > /dev/null
+else
+ ./mbmap -h 240 -w 320 -o HMMV_mbmap.bin mv_dec.bin > /dev/null
+fi
+
+if [ ! -e "./HMMV_mbmap.bin" ] ; then
+echo "Mapping MV to CTU (Grid of MVs) for [$SourceVid], ./HMMV_mbmap.bin is not generated"
+break
+fi
+
+#%%%%%%%%%% Check if directory exist otherwise make it, and then move the MV file to the directory after naming it appropriately"
+echo "Moving outputs to HMMV parent directory"
+
+if ! [ -d ../../HMMV ]
+then
+mkdir ../../HMMV
+fi
+
+FileName="${SourceVid##*/}"
+FileNameP1="${FileName%.*}"
+mv -f ../HM_MVX_NoTexture/vid/HMEncodedVideo.bin ../../HMMV/$FileNameP1'_Cropped.bin'
+mv -f ../HM_MVX/vid/HMEncodedVideo.bin ../../HMMV/$FileNameP1.bin
+mv -f HMMV_mbmap.bin ../../HMMV/$FileNameP1'_HMMV.bin'
+mv -f ../HM_MVX_NoTexture/bin/stats.dat ../../HMMV/$FileNameP1'_HMStats_NoTexture.dat'
+mv -f ../HM_MVX/bin/stats.dat ../../HMMV/$FileNameP1'_HMStats_OrigHM.dat'
+
+#mv -f ../HM_MVX_NoTexture/bin/FrameStats.dat ../../HMMV/$FileNameP1'_HMFrameStats.dat'
+#mv -f ../HM_MVX/bin/FrameStats.dat ../../HMMV/$FileNameP1'_HMFrameStats.dat'
+
+

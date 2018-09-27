@@ -57,4 +57,3 @@ To produce results in the JRNL paper:
 6-Get the correct decision vectors from the CNN model
 7-To load the stats and decision vectors per video run the MainCreateProcessVideoObjects.m file. This will create separate object for each video with attributed based on the stats  and decision vectors files.
 8-Edit the header and then run the AnalyticalMultiCNN_shortGamma_Rmotion.m to get the Multi-CNN threshold values (R_L and R_H). You will also get expected classification accuracy and required rate of Multi-CNN based on these threshold values.
-
