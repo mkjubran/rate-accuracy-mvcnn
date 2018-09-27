@@ -137,7 +137,7 @@ rm ./vid/JMEncodedVideo.264
 fi
 
 rm -rf ./FrameStats.dat
-echo "Original JM: encoding to produce rate (bps) per frame (optional) " 
+echo "Original JM: encoding to produce rate (bps) per frame (optional: for comparsion purposes) " 
 ./lencod.exe -f $enc_cfg -p InputFile="./vid/JMInputVideo.yuv" -p QPISlice=$QPISlice -p QPPSlice=$QPPSlice -p SearchRange=$SearchRange -p FramesToBeEncoded=$NumFrame -p OutputFile="./vid/JMEncodedVideo.264" > logOrig #> /dev/null
 
 if [ ! -e "./vid/JMEncodedVideo.264" ] ; then

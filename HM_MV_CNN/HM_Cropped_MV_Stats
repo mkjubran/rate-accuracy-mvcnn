@@ -160,7 +160,7 @@ rm ../vid/HMEncodedVideo.bin > /dev/null 2>&1
 fi
 
 rm -rf ./logOrig
-echo "Original HM: encoding and then decoding to produce rates and stats (optional)" 
+echo "Original HM: encoding and then decoding to produce rates and stats (optional: for comparsion purposes)" 
 ./TAppEncoderStatic -c ../cfg/$enc_cfg --InputFile="../vid/HMInputVideo.yuv" --QP=$QP --FramesToBeEncoded=$NumFrame --MaxCUSize=$MaxCUSize --MaxPartitionDepth=$MaxPartitionDepth --BitstreamFile="../vid/HMEncodedVideo.bin" > logOrig
 
 if [ ! -e "../vid/HMEncodedVideo.bin" ] ; then
@@ -191,7 +191,8 @@ cd ../../HM_MVX_NoTexture/bin #% moveing back to the Original HM Directory
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-#%%%%%%%%%% Mapping MV to Macroblocks (make grid) and make them in a format suitable as input to classifier (Training/Testing)"
+#%%%%%%%%%% Mapping MV to CU (make grid) and make them in a format suitable as input to classifier (Training/Testing)"
+echo "Mapping MV to a grid according to CU positions"
 rm ../../mbmap/mv_dec.bin
 mv -f mv.bin ../../mbmap/mv_dec.bin
 cd ../../mbmap

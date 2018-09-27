@@ -21,7 +21,7 @@ The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 1. use ffmpeg to transcode the input video to YUV format with size WxH
 2. encoded YUV video using the modified AVC/H.264 JM refernce software to produced the cropped x264 bitsream
 3. decoded the cropped bitstream using the modified AVC/H.264 JM reference software to extract the MVs
-4. map these MVs to a Gird with a dimmension set according to the resolution of the input video (WxH) and res parameters
+4. map these MVs to a Gird with a dimension set according to the resolution of the input video (WxH) and the res parameter
 
 Various encoding parameters can be set directly such as
 
@@ -36,12 +36,12 @@ Option | Description [default]
 --res  |  resolution of the MB Grid (4,8,16) [8]
 
 The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
-1. Cropped JM bitstream (x264)
-2. flow estimate file MV.bin
-3. States (including rate) per frame for the cropped bitstream
-4. Summary of states for the cropped bitstream
-5. States (including rate) per frame for the bitstream produced by the original JM encoder
-6. Summary of states for the original JM bitstream
+- Cropped JM bitstream (x264)
+- flow estimate file MV.bin
+- States (including rate) per frame for the cropped bitstream
+- Summary of states for the cropped bitstream
+- States (including rate) per frame for the bitstream produced by the original JM encoder
+- Summary of states for the original JM bitstream
 
 Sample Output using default parameters:
 %########################################################################################
@@ -50,7 +50,7 @@ JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi
 - Converting source video to YUV format
 - Producing cropped H.264 bitstream (encoder)
 - Extracting MVs from the cropped H.264 bitstream (decoder)
-- Original JM: encoding to produce rate (bps) per frame (optional) 
+- Original JM: encoding to produce rate (bps) per frame (optional: for comparison purposes) 
 - Mapping MV to a grid according to Macroblocks positions
 - Moving outputs to JMMV parent directory
 
@@ -64,7 +64,7 @@ The HM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 1. use ffmpeg to transcode the input video to YUV format with size WxH
 2. encoded YUV video using the modified HEVC refernce software to produced the cropped .bin bitsream
 3. decoded the cropped bitstream using the modified HEVC reference software to extract the MVs
-4. map these MVs to a Gird with a dimmension set according to the resolution of the input video (WxH) and res parameters
+4. map these MVs to a Gird with a dimension set according to the resolution of the input video (WxH) and res parameter
 
 Various encoding parameters can be set directly such as
 
@@ -78,25 +78,24 @@ Option | Description [default]
 --mcu |   maximum CTU size [16]
 --mpd |   maximum partition depth [2]
 --sr  |   search range [16]
---res  |  resolution of the MB Grid (4,8,16) [8]
+--res  |  resolution of the CU Grid (4,8,16) [8]
 
-The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
-1. Cropped JM bitstream (x264)
-2. flow estimate file MV.bin
-3. States (including rate) per frame for the cropped bitstream
-4. Summary of states for the cropped bitstream
-5. States (including rate) per frame for the bitstream produced by the original JM encoder
-6. Summary of states for the original JM bitstream
+The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
+- Cropped HM bitstream (xbin)
+- flow estimate file MV.bin
+- Original HM: encoding and then decoding to produce rates and stats (optional: for comparison purposes)
+- Mapping MV to a grid according to CU positions
+- Moving outputs to HMMV parent directory
 
 Sample Output using default parameters:
 %########################################################################################
-JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
+JM config file=encoder_rate_accuracy.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
 - Converting source video to YUV format
-- Producing cropped H.264 bitstream (encoder)
-- Extracting MVs from the cropped H.264 bitstream (decoder)
-- Original JM: encoding to produce rate (bps) per frame (optional) 
-- Mapping MV to a grid according to Macroblocks positions
-- Moving outputs to JMMV parent directory
+- Producing cropped HEVC bitstream (encoder)
+- Extracting MVs from the cropped HEVC bitstream (decoder)
+- Original HM: encoding to produce rate (bps) per frame (optional) 
+- Mapping MV to a grid according to Macr
+- Moving outputs to HMMV parent directory
 
 
