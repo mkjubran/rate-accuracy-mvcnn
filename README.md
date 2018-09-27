@@ -1,11 +1,11 @@
 # main
 
-AVC/H.264 Cropped Bitstream
+##AVC/H.264 Cropped Bitstream
 
-To produce cropped Bitstream use
+##To produce cropped Bitstream use
 ./JM_Cropped_MV_Stats -svid <source video>
 
-Options:
+##Options:
 Various encoding parameters can be set directly such as
    --ecfg   JM configuration file
    -svid    input video
@@ -20,6 +20,17 @@ Outputs:
 4- Summary of states for the cropped bitstream
 5- States (including rate) per frame for the bitstream produced by the original JM encoder
 6- Summary of states for the original JM bitstream
+
+Sample Output:
+%########################################################################################
+JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
+%########################################################################################
+Converting source video to YUV format
+Producing cropped H.264 bitstream (encoder)
+Extracting MVs from the cropped H.264 bitstream (decoder)
+Original JM: encoding to produce rate (bps) per frame (optional) 
+Mapping MV to a grid according to Macroblocks positions
+Moving outputs to JMMV parent directory
 
 ----------------------------------------------------------------
 HEVC/H.265 Cropped Bitstream
@@ -43,6 +54,16 @@ Outputs:
 3- MV.bin file where MV values are extracted from cropped HM bitstream and mapped to a grid according to the correspodning CU position
 4- Summary of states for the cropped bitstream
 5- Summary of states for the original HM bitstream
+
+Sample Output:
+%########################################################################################
+HM config file=encoder_Jubran.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=24, Max CU Size=16, Max Partition Depth=2, Search Range=16, MV Resolution=8
+%########################################################################################
+Converting source video to YUV format
+Producing cropped HEVC bitstream (encoder)
+Extracting MVs from the cropped HEVC bitstream (decoder)
+Original HM: encoding and then decoding to produce rates and stats (optional)
+Moving outputs to HMMV parent directory
 
 ----------------------------------------------------------
 To produce results in the JRNL paper:
