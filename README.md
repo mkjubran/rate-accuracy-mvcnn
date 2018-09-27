@@ -20,7 +20,7 @@ The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 1. use ffmpeg to transcode the input video to YUV format with size WxH
 2. encoded YUV video using the modified AVC/H.264 JM refernce software to produced the cropped x264 bitsream
 3. decoded the cropped bitstream using the modified AVC/H.264 JM reference software to extract the MVs
-4. map these MVs to a Gird with a dimension set according to the resolution of the input video (WxH) and the res parameter
+4. map these MVs to a Gird with a dimension set according to the resolution of the input video **WxH** and the **res** parameter
 
 Various encoding parameters can be set directly such as
 
@@ -63,7 +63,7 @@ The HM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 1. use ffmpeg to transcode the input video to YUV format with size WxH
 2. encoded YUV video using the modified HEVC refernce software to produced the cropped .bin bitsream
 3. decoded the cropped bitstream using the modified HEVC reference software to extract the MVs
-4. map these MVs to a Gird with a dimension set according to the resolution of the input video (WxH) and res parameter
+4. map these MVs to a Gird with a dimension set according to the resolution of the input video **WxH** and **res** parameter
 
 Various encoding parameters can be set directly such as
 
