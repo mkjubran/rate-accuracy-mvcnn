@@ -14,7 +14,7 @@ In order to run thie code you will need:
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstream and the approximated flow run
 ```
-./JM_Cropped_MV_Stats -svid <source video>
+./JM_Cropped_MV_Stats -svid <input_video>
 ```
 
 The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped bitsream and flow estimates according to the following steps:
@@ -48,10 +48,15 @@ Sample Output:
 JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
 Converting source video to YUV format
+
 Producing cropped H.264 bitstream (encoder)
+
 Extracting MVs from the cropped H.264 bitstream (decoder)
+
 Original JM: encoding to produce rate (bps) per frame (optional) 
+
 Mapping MV to a grid according to Macroblocks positions
+
 Moving outputs to JMMV parent directory
 
 
