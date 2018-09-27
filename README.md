@@ -90,7 +90,7 @@ The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
 
 File Name | Description
 ---|---
-x.bin | compressed HM bitstream
+x.bin | Compressed HM bitstream
 x_Cropped.bin | Cropped HM bitstream
 x_HMMV.bin | Flow estimate using HM MVs
 x_HMStats_NoTexture.dat | Summary of states for the cropped bitstream
