@@ -36,6 +36,7 @@ Option | Description [default]
 --res  |  resolution of the MB Grid (4,8,16) [8]
 
 The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
+
 File Name | Description
 ---|---
 x.264 | Compressed JM bitstream
@@ -86,6 +87,7 @@ Option | Description [default]
 --res  |  resolution of the CU Grid (4,8,16) [8]
 
 The HM_Cropped_MV_Stats generate the following items in HMMV parent directory:
+
 File Name | Description
 ---|---
 x.bin | compressed HM bitstream
