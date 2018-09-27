@@ -25,6 +25,7 @@ The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped b
 
 Various encoding parameters can be set directly such as
 Option | Description
+---|---
    --ecfg |  JM configuration file
    --svid |  input video
    --qp  |   QP value for P and I frames
