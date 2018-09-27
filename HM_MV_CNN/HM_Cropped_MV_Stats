@@ -222,7 +222,7 @@ mv -f ../HM_MVX_NoTexture/vid/HMEncodedVideo.bin ../../HMMV/$FileNameP1'_Cropped
 mv -f ../HM_MVX/vid/HMEncodedVideo.bin ../../HMMV/$FileNameP1.bin
 mv -f HMMV_mbmap.bin ../../HMMV/$FileNameP1'_HMMV.bin'
 mv -f ../HM_MVX_NoTexture/bin/stats.dat ../../HMMV/$FileNameP1'_HMStats_NoTexture.dat'
-mv -f ../HM_MVX/bin/stats.dat ../../HMMV/$FileNameP1'_HMStats_OrigHM.dat'
+mv -f ../HM_MVX/bin/stats.dat ../../HMMV/$FileNameP1'_HMStats_Orig.dat'
 
 #mv -f ../HM_MVX_NoTexture/bin/FrameStats.dat ../../HMMV/$FileNameP1'_HMFrameStats.dat'
 #mv -f ../HM_MVX/bin/FrameStats.dat ../../HMMV/$FileNameP1'_HMFrameStats.dat'

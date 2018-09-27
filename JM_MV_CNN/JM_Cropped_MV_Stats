@@ -187,8 +187,8 @@ mv -f ../JM_MVX/bin/vid/JMEncodedVideo.264 ../../JMMV/$FileNameP1.264
 mv -f JMMV_mbmap.bin ../../JMMV/$FileNameP1'_JMMV.bin'
 mv -f ../JM_MVX_NoTexture/bin/stats.dat ../../JMMV/$FileNameP1'_JMStats_NoTexture.dat'
 mv -f ../JM_MVX_NoTexture/bin/FrameStats.dat ../../JMMV/$FileNameP1'_JMFrameStats_NoTexture.dat'
-mv -f ../JM_MVX/bin/stats.dat ../../JMMV/$FileNameP1'_JMStats_OrigJM.dat'
-mv -f ../JM_MVX/bin/FrameStats.dat ../../JMMV/$FileNameP1'_JMFrameStats_OrigJM.dat'
+mv -f ../JM_MVX/bin/stats.dat ../../JMMV/$FileNameP1'_JMStats_Orig.dat'
+mv -f ../JM_MVX/bin/FrameStats.dat ../../JMMV/$FileNameP1'_JMFrameStats_Orig.dat'
 
 cd ..
 
