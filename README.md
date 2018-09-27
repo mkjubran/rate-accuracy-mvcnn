@@ -11,7 +11,7 @@ In order to run thie code you will need:
 2. ffmpeg (tested with version 2.8.15)
 3. TensorFlow (tested with TensorFlow 1.1.0)
 
-## Producing Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
+## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstream and the approximated flow run
 ...
 ./JM_Cropped_MV_Stats -svid <source video>
@@ -34,10 +34,10 @@ Option | Description [default]
 --qp  |   QP value for P and I frames [40]
 --sr  |   search range [16]
 --res  |  resolution of the MB Grid (4,8,16) [8]
-   
-Outputs:
-1. Cropped JM bitstream
-2. MV.bin file where MV values are mapped to a grid according to the correspodning MB position
+
+The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
+1. Cropped JM bitstream (x264)
+2. flow estimate file MV.bin
 3. States (including rate) per frame for the cropped bitstream
 4. Summary of states for the cropped bitstream
 5. States (including rate) per frame for the bitstream produced by the original JM encoder
