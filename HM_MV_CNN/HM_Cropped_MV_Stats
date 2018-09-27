@@ -2,8 +2,8 @@
 #clear
 
 # Set initial default parameters
-enc_cfg=encoder_Jubran.cfg	#HM encoder configuration file
-QP=24	 			#value [0 - 51]
+enc_cfg=encoder_rate_accuracy.cfg	#HM encoder configuration file
+QP=40	 			#value [0 - 51]
 MaxCUSize=16			#Maximum CU size which plays a factor in setting the resolution of MVs
 MaxPartitionDepth=2		#Maximum parition depth which plays a factor in setting the resolution of the MVs
 SearchRange=16			#value [16,32,64]
