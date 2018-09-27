@@ -9,7 +9,6 @@ This repository contains our public tool for producing cropped AVC and HEVC bits
 In order to run thie code you will need:
 1. Python 2.7 
 2. ffmpeg (tested with version 2.8.15)
-3. TensorFlow (tested with TensorFlow 1.1.0)
 
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstream and the approximated flow run
