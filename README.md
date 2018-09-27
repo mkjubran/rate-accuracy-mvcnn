@@ -43,21 +43,16 @@ The JM_Cropped_MV_Stats generate the following items in JMMV parent directory:
 5. States (including rate) per frame for the bitstream produced by the original JM encoder
 6. Summary of states for the original JM bitstream
 
-Sample Output:
+Sample Output using default parameters:
 %########################################################################################
 JM config file=encoder_option2.cfg, Source Video=v_BoxingPunchingBag_g05_c01.avi, QP=40, Search Range=16, MV Resolution=8
 %########################################################################################
-Converting source video to YUV format
-
-Producing cropped H.264 bitstream (encoder)
-
-Extracting MVs from the cropped H.264 bitstream (decoder)
-
-Original JM: encoding to produce rate (bps) per frame (optional) 
-
-Mapping MV to a grid according to Macroblocks positions
-
-Moving outputs to JMMV parent directory
+- Converting source video to YUV format
+- Producing cropped H.264 bitstream (encoder)
+- Extracting MVs from the cropped H.264 bitstream (decoder)
+- Original JM: encoding to produce rate (bps) per frame (optional) 
+- Mapping MV to a grid according to Macroblocks positions
+- Moving outputs to JMMV parent directory
 
 
 The MVX tool takes an x264 bitstream as input and outputs the approximated flow 
