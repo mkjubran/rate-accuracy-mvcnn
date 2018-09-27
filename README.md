@@ -13,9 +13,9 @@ In order to run thie code you will need:
 
 ## Cropped AVC/H.264 Bitstream and Optical Flow Approximation (MVs)
 To produce AVC/H.264 cropped bitstream and the approximated flow run
-'''
+```
 ./JM_Cropped_MV_Stats -svid <source video>
-'''
+```
 
 The JM_Cropped_MV_Stats script takes an avi input video to produce the cropped bitsream and flow estimates according to the following steps:
 1. use ffmpeg to transcode the input video to YUV format with size WxH
